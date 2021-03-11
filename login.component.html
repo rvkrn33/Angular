@@ -1,0 +1,71 @@
+<!---
+<div id="sidebar" [class]="isDisplay">
+
+ <div class="toggle-btn" (click)="toggleDisplay()">
+    <span></span>
+    <span></span>
+    <span></span>
+  <ul>
+    <li>home</li>
+    <li>about</li>
+    <li>service</li>
+  </ul>
+</div>
+    -->
+<div class="container">
+  <div class="row ">
+
+    <div class="col-md-9">
+      <div class="panel panel-success">
+        <div class="panel-heading">Login</div>
+
+        <div class="panel-body">
+
+          <form  class="form-horizontal" (ngSubmit)="loginForm()">
+
+            <div class="form-group">
+
+              <label for="userType" class="control-label col-sm-2">User Type</label>
+
+              <div class="col-sm-2">
+
+                <select id="userType" name="userType" [(ngModel)]="user.userType" class="form-control">
+                  <option value="Admin">Admin</option>
+                  <option value="User">User</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <label for="userId" class="control-label col-sm-2">User Id</label>
+              <div class="col-sm-2">
+
+                <input required type="text" id="userId"[(ngModel)]="user.userId"  name="userId" class="form-control">
+              
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <label for="pass" class="control-label col-sm-2">Password</label>
+              <div class="col-sm-2" >
+
+                <input required type="password" id="pass" name="pass" [(ngModel)]="user.pass" class="form-control">
+              </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" >Save </button>
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
