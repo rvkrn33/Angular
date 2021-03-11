@@ -1,0 +1,132 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoginService {
+
+  userNav: boolean;
+  flatNav: boolean;
+  transNav: boolean;
+  userNameShow: boolean;
+
+  userName: string;
+  loginPanel: boolean;
+  roleType: boolean;
+  menu: boolean;
+
+  constructor() {
+    this.userNav = false;
+    this.flatNav = false;
+    this.transNav = false;
+
+    this.userNameShow = false;
+    this.userName = "DD";
+    this.loginPanel = false;
+    this.menu = false;
+
+  }
+
+  get userNavbar(): boolean {
+    return this.userNav;
+  }
+
+  set userNavbar(value: boolean) {
+    this.userNav = value;
+  }
+
+  get transNav1(): boolean {
+    return this.transNav;
+  }
+
+  set transNav1(value: boolean) {
+    this.transNav = value;
+  }
+
+  get flatNav1(): boolean {
+    return this.flatNav;
+  }
+
+  set flatNav1(value: boolean) {
+    this.flatNav = value;
+  }
+
+  get loginPanel1(): boolean {
+    return this.loginPanel;
+  }
+
+  set loginPanel1(value: boolean) {
+    this.loginPanel = value;
+  }
+
+  get userNameShow1(): boolean {
+    return this.userNameShow;
+  }
+
+  set userNameShow1(value: boolean) {
+    this.userNameShow = value;
+  }
+  get userName1(): string {
+    return this.userName;
+  }
+
+  set userName1(value: string) {
+    this.userName = value;
+  }
+
+  get menu1(): boolean {
+    return this.menu;
+  }
+
+  set menu1(value: boolean) {
+    this.menu = value ;
+  }
+
+
+  showAfterLogin() {
+    console.log("showAfterLogin  ");
+    let usernm=sessionStorage.getItem("username");
+    let utype = sessionStorage.getItem("userType");
+    console.log(usernm, utype);
+
+    if (utype == 'Admin') {
+      this.userNavbar = true;
+      this.flatNav = true;
+      this.transNav = true;
+      this.menu = true;
+    }
+    else if (utype == 'User') {
+      this.userNavbar = true;
+    }
+    else if (utype == 'Other') {
+      this.flatNav = true;
+      this.transNav = true;
+    }
+   
+    this.userNameShow1 = true;
+    this.userName1 = usernm;
+    this.loginPanel = true;
+
+    console.log(this.userNavbar, this.userNameShow1,this.userName1,  this.loginPanel);
+  }
+
+   authenticate(username, password) {
+    if (username === "javainuse" && password === "password") {
+      sessionStorage.setItem('username', username)
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isUserLoggedIn() {
+    let user = sessionStorage.getItem('username')
+    console.log(!(user === null))
+    return !(user === null)
+  }
+
+  logOut() {
+    sessionStorage.removeItem('username')
+  }
+
+}
