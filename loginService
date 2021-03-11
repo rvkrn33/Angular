@@ -1,0 +1,48 @@
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { map, filter, switchMap } from 'rxjs/operators';
+
+import { Flat } from '../flat';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class FlatService {
+
+  private baseUrl: string = 'http://localhost:8888/api';
+  private headers = new Headers({ 'Content-Type': 'application/json' });
+  private options = new RequestOptions({ headers: this.headers });
+  private flat: Flat;
+  constructor(private _http: Http) {
+
+  }
+
+  getFlats() {
+    //   return this._http.get(this.baseUrl + '/users', this.options).map((response: Response) => response.json());
+    return this._http.get(this.baseUrl + '/flats', this.options).pipe(map((response: Response) => response.json()));
+  }
+
+  getFlat(flatId: Number) {
+    return this._http.get(this.baseUrl + '/flat/' + flatId, this.options).pipe(map((response: Response) => response.json()));
+  }
+
+  deleteFlat(flatId: Number) {
+    return this._http.delete(this.baseUrl + '/flat/' + flatId, this.options).pipe(map((response: Response) => response.json()));
+  }
+
+  createFlat(flat: Flat) {
+    return this._http.post(this.baseUrl + '/flat', JSON.stringify(flat), this.options).pipe(map((response: Response) => response.json()));
+  }
+
+  updateFlat(flat: Flat) {
+    return this._http.put(this.baseUrl + '/flat', JSON.stringify(flat), this.options).pipe(map((response: Response) => response.json()));
+  }
+
+  setter(flat: Flat) {
+    this.flat = flat;
+  }
+
+  getter() {
+    return this.flat;
+  }
+}
